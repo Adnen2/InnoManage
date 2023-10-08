@@ -11,6 +11,9 @@ import Form from "./scenes/form";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
+import Navbar from "./layout/Navbar";
+import Header from './layout/Header';
+import Dialo from "./components/Dialo";
 import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
@@ -19,7 +22,19 @@ import Calendar from "./scenes/calendar/calendar";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-
+  const [test, setTest] = useState(true);
+ 
+  if(test){
+    return(
+      <Routes>
+          <Route path="/" element={<Navbar />} >
+            <Route index element={<Header />} />
+            <Route path="login" element={<Dialo valeur="login" />} />
+            <Route path="logup" element={<Dialo  valeur="logup"/>} />
+          </Route>
+        </Routes>
+    );
+  }else{
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -29,7 +44,7 @@ function App() {
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/Dashboard" element={<Dashboard />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
@@ -45,7 +60,7 @@ function App() {
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
-  );
+  );}
 }
 
 export default App;
