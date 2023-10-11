@@ -18,11 +18,12 @@ import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
+import Task from "./components/Task";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [test, setTest] = useState(true);
+  const [test, setTest] = useState(false);
   
  
   if(test){
@@ -56,6 +57,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
+              <Route path="/task" element={<Task />} />
             </Routes>
           </main>
         </div>
