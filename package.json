@@ -26,6 +26,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^3.4.1",
     "chart.js": "^4.4.0",
     "data-grid": "^3.0.0",
     "formik": "^2.4.5",
