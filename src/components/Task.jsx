@@ -1,24 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import Popper from '@material-ui/core/Popper';
+import { DataGrid} from '@mui/x-data-grid';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Owner from './Owner';
-import { useEffect } from 'react';
 
 const rows = [
-  { id: 1, task: "aa", owner: ["email1@gmail.com", "email2@gmail.com"], dueDate: "aaa", status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-  { id: 2, task: "aa", owner: ["email3@gmail.com", "email4@gmail.com"], dueDate: "aaa", status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-  { id: 3, task: "aa", owner: ["email5@gmail.com", "email6@gmail.com"], dueDate: "aaa", status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-  { id: 4, task: "aa", owner: ["email7@gmail.com", "email8@gmail.com"], dueDate: "aaa", status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-  { id: 5, task: "aa", owner: ["email9@gmail.com", "email10@gmail.com"], dueDate: "aaa", status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-  { id: 6, task: "aa", owner: ["email11@gmail.com", "email12@gmail.com"], dueDate: "aaa", status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-  { id: 7, task: "aa", owner: ["email13@gmail.com", "email14@gmail.com"], dueDate: "aaa", status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-  { id: 8, task: "aa", owner: ["email15@gmail.com", "email16@gmail.com"], dueDate: "aaa", status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-]
+  { id: 1, task: "aa", owner: ["email1@gmail.com", "email2@gmail.com"], dueDate: new Date(2023, 9, 25), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 2, task: "aa", owner: ["email3@gmail.com", "email4@gmail.com"], dueDate: new Date(2023, 10, 15), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 3, task: "aa", owner: ["email5@gmail.com", "email6@gmail.com"], dueDate: new Date(2023, 11, 5), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 4, task: "aa", owner: ["email7@gmail.com", "email8@gmail.com"], dueDate: new Date(2023, 11, 25), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 5, task: "aa", owner: ["email9@gmail.com", "email10@gmail.com"], dueDate: new Date(2024, 0, 15), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 6, task: "aa", owner: ["email11@gmail.com", "email12@gmail.com"], dueDate: new Date(2024, 1, 5), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 7, task: "aa", owner: ["email13@gmail.com", "email14@gmail.com"], dueDate: new Date(2024, 1, 25), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 8, task: "aa", owner: ["email15@gmail.com", "email16@gmail.com"], dueDate: new Date(2024, 2, 15), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+];
+
 export default function Task() {
   const columns = [
     {
@@ -31,33 +27,10 @@ export default function Task() {
       field: 'owner',
       headerName: 'Owner',
       renderCell: emails => (
-        <Box>
-          <ArrowDropDownIcon id={emails.id} onClick={(event) =>{
-            setBoxVisible(boxVisible === emails.id ? -1 : emails.id)
-            setButton(event.target)
-          }}/>
-          {/* <Popper
-            open={boxVisible === emails.id}
-            anchorEl={boxVisible === emails.id ? button : null}
-            placement="bottom-start"
-          >
-            <Box style={dropdownStyle}>
-              <AddCircleOutlineIcon onClick={addEmail} />
-              <Stack spacing={1}>
-                {
-                  emails.formattedValue.map((email, index) => (
-                    <Chip
-                      key={index}
-                      label={email}
-                      onDelete={() => {
-                        handleDelete(emails.id, email)
-                      }}
-                    />
-                  ))}
-              </Stack>
-            </Box>
-          </Popper> */}
-        </Box>
+        <ArrowDropDownIcon id={emails.id} onClick={(event) =>{
+          setBoxVisible(boxVisible === emails.id ? -1 : emails.id)
+          setButton(event.target)
+        }}/>
       ),
       flex: 1,
       width: 150
@@ -65,6 +38,7 @@ export default function Task() {
     {
       field: 'dueDate',
       headerName: 'Due Date',
+      type: 'date',
       width: 150,
       editable: true,
     },
@@ -111,7 +85,8 @@ export default function Task() {
   const [data, setData] = useState(rows)
   const [button, setButton] = useState(null)
   const [boxVisible, setBoxVisible] = useState(-1);
-  const [emails,setEmails]=useState([ ])
+  const [emails,setEmails]=useState([])
+   
   useEffect(()=>{
     if(boxVisible!=-1)
       setEmails(data.filter(item=>item.id===boxVisible)[0].owner)
@@ -128,16 +103,7 @@ export default function Task() {
     setData(updatedData);
   };
 
-  const dropdownStyle = {
-    position: 'absolute',
-    top: '100%', 
-    left: 0,
-    background: 'white',
-    border: '1px solid #ccc',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-    zIndex: '1',
-    padding: '10px',
-  };
+  
   const addEmail = (email,id) => {
     const updatedData = data.map((row) => {
       if (row.id.toString() ==  id) 
@@ -159,9 +125,10 @@ export default function Task() {
       <Owner 
         op={boxVisible!==-1} 
         button={button} 
-        emails={emails} 
+        emails={emails}
         handleDelete={(id,item)=>handleDelete(id,item)} 
         addEmail={(email,id)=>addEmail(email,id)}
+        setBoxVisible={()=>setBoxVisible(-1)}
       />
     </Box>
   );
