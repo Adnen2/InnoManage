@@ -23,6 +23,11 @@ import { firebaseConfig } from "./configuration_fire";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
+
+  
+
+import Task from "./components/Task";
+
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -48,6 +53,9 @@ function App() {
 
   
   }, []);
+  
+ 
+
   if(test){
     return(
       <Routes>
@@ -79,6 +87,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
+              <Route path="/task" element={<Task />} />
             </Routes>
           </main>
         </div>
