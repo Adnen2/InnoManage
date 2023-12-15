@@ -86,4 +86,29 @@
   }
  }
  
- 
+ /* CSS for styling the file input button */
+.file-input-label {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  text-align: center;
+  font-weight: bold;
+}
+
+.file-input-button {
+  display: inline-block;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Hide the file input */
+.file-input {
+  display: none;
+}
+
