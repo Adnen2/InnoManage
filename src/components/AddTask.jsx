@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import Box from '@mui/material/Box';
 
 const AddTask = ({ addTask }) => {
   const [taskData, setTaskData] = useState({
@@ -69,7 +70,7 @@ const AddTask = ({ addTask }) => {
   };
 
   return (
-    <div>
+    <Box sx={{ height: 400, width: '100%' }}>
       {/* Your form fields go here */}
       <TextField
         label="Task Name"
@@ -120,7 +121,7 @@ const AddTask = ({ addTask }) => {
       <Button variant="contained" color="primary" onClick={handleAddTask}>
         Add Task
       </Button>
-    </div>
+    </Box>
   );
 };
 

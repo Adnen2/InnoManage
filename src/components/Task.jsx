@@ -11,10 +11,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import { NavLink } from 'react-router-dom';
+import Typography from '@mui/material/Typography';
 
 const rows = [
-  { id: 1, task: "aa", owner: ["email1@gmail.com", "email2@gmail.com"], dueDate: new Date(2023, 9, 25), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
-  { id: 2, task: "aa", owner: ["email3@gmail.com", "email4@gmail.com"], dueDate: new Date(2023, 10, 15), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 1, task: "Done", owner: ["email1@gmail.com", "email2@gmail.com"], dueDate: new Date(2023, 9, 25), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
+  { id: 2, task: "Done", owner: ["email3@gmail.com", "email4@gmail.com"], dueDate: new Date(2023, 10, 15), status: "aaa", priority: 10, notes: "aaa", files: 5, timeline: 15, lastUpdated: 20 },
 ];
 
 export default function Task() {
@@ -86,11 +87,11 @@ export default function Task() {
                 variant="contained"
                 color="primary"
                 startIcon={<EditIcon />}
-                //onClick={ }
+              //onClick={ }
               >
                 Edit
               </Button>
-              </MenuItem>
+            </MenuItem>
           </Select>
         );
       },
@@ -191,7 +192,71 @@ export default function Task() {
   };
   return (
     <Box sx={{ height: 400, width: '100%' }}>
-      <NavLink to={"/AddTask"} className={"btn border-t-neutral-950"}>Add New Task</NavLink>
+      
+      <NavLink to={"/AddTask"} sx={{ margin: 2 }} style={{ textDecoration: 'none', color: 'white', background: 'blue', padding: '10px', borderRadius: '5px' }}>
+        Add New Task
+      </NavLink>
+      
+      <Typography variant="h4" sx={{ margin: 2 }} color={"green"}>
+        Done
+      </Typography>
+      <DataGrid
+        rows={data}
+        columns={columns}
+        autoHeight
+        pageSizeOptions={[5, 10, 15]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+      <Owner
+        op={boxVisible !== -1}
+        button={button}
+        emails={emails}
+        handleDelete={(id, item) => handleDelete(id, item)}
+        addEmail={(email, id) => addEmail(email, id)}
+        setBoxVisible={() => setBoxVisible(-1)}
+      />
+      <Typography variant="h4" sx={{ margin: 2 }} color={"yellow"}>
+        Working on it
+      </Typography>
+      <DataGrid
+        rows={data}
+        columns={columns}
+        autoHeight
+        pageSizeOptions={[5, 10, 15]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+      <Owner
+        op={boxVisible !== -1}
+        button={button}
+        emails={emails}
+        handleDelete={(id, item) => handleDelete(id, item)}
+        addEmail={(email, id) => addEmail(email, id)}
+        setBoxVisible={() => setBoxVisible(-1)}
+      />
+      <Typography variant="h4" sx={{ margin: 2 }} color={"blue"}>
+      Not Started
+      </Typography>
+      <DataGrid
+        rows={data}
+        columns={columns}
+        autoHeight
+        pageSizeOptions={[5, 10, 15]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+      <Owner
+        op={boxVisible !== -1}
+        button={button}
+        emails={emails}
+        handleDelete={(id, item) => handleDelete(id, item)}
+        addEmail={(email, id) => addEmail(email, id)}
+        setBoxVisible={() => setBoxVisible(-1)}
+      />
+      <Typography variant="h4" sx={{ margin: 2 }} color={"red"}>
+      Stuck
+      </Typography>
       <DataGrid
         rows={data}
         columns={columns}

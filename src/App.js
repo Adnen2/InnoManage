@@ -61,7 +61,7 @@ function App() {
           <Route path="/" element={<Navbar />} >
             <Route index element={<Header />} />
             <Route path="login" element={<Dialo valeur="login" />} />
-            <Route path="logup" element={<Dialo  valeur="logup"/>} />
+            <Route path="logout" element={<Dialo  valeur="logup"/>} />
           </Route>
         </Routes>
     );
