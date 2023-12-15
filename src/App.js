@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
+
 import Dashboard from "./scenes/dashboard";
 import Team from "./scenes/team";
 import Invoices from "./scenes/invoices";
@@ -18,12 +19,35 @@ import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
-
+import { firebaseConfig } from "./configuration_fire";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const [test, setTest] = useState(true);
- 
+  const firebaseApp = initializeApp(firebaseConfig);
+  const auth = getAuth(firebaseApp);
+  
+  useEffect(() => {
+    const listen = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setTest(false);
+        console.log(user.uid);
+      } else {
+        setTest(true);
+      }
+    });
+
+    return () => {
+      listen();
+    };
+
+
+
+  
+  }, []);
   if(test){
     return(
       <Routes>
